@@ -38,6 +38,7 @@ public class Practice16TextPathView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        paint.getTextPath(text, 0, text.length(), 50, 400, textPath);
         canvas.drawText(text, 50, 200, paint);
 
         canvas.drawPath(textPath, pathPaint);

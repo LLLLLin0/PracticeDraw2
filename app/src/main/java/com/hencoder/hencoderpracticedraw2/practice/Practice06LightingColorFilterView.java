@@ -3,8 +3,12 @@ package com.hencoder.hencoderpracticedraw2.practice;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
+import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -37,10 +41,20 @@ public class Practice06LightingColorFilterView extends View {
 
         // 使用 Paint.setColorFilter() 来设置 LightingColorFilter
 
-        // 第一个 LightingColorFilter：去掉红色部分
-        canvas.drawBitmap(bitmap, 0, 0, paint);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.batman);
+        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
+        paint.setShader(shader);
+        LightingColorFilter colorFilter = new LightingColorFilter(0x00FFFF, 0x000000);
+        paint.setColorFilter(colorFilter);
+
+        // 第一个 LightingColorFilter：去掉红色部分
+        canvas.drawBitmap(this.bitmap, 0, 0, paint);
+
+        colorFilter = new LightingColorFilter(0xFFFFFF, 0x009000);
+//        paint.setColorFilter(colorFilter)
         // 第二个 LightingColorFilter：增强绿色部分
-        canvas.drawBitmap(bitmap, bitmap.getWidth() + 100, 0, paint);
+        paint.setColorFilter(colorFilter);
+        canvas.drawBitmap(this.bitmap, this.bitmap.getWidth() + 100, 0, paint);
     }
 }
